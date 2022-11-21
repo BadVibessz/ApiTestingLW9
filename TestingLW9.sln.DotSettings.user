@@ -1,0 +1,12 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=88567dfb_002D559a_002D4cf0_002D8350_002Dca7877190b8d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Should_Do_Nothing_When_Updating_With_Invalid_Products" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::133C0D57-8470-4CA4-9D8C-17CAF700A443::net6.0::Tests.Tests.Should_Do_Nothing_When_Updating_With_Invalid_Products&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::133C0D57-8470-4CA4-9D8C-17CAF700A443::net6.0::Tests.Tests.Should_Successfully_Add_Product&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::133C0D57-8470-4CA4-9D8C-17CAF700A443::net6.0::Tests.Tests.Should_Successfully_Delete_Existing_Product&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::133C0D57-8470-4CA4-9D8C-17CAF700A443::net6.0::Tests.Tests.Should_Do_Nothing_When_Deleting_Not_Existing_Product&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=badde1f4_002D9d37_002D4ada_002Db31b_002D8df280a6e451/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Should_Successfully_Get_All_Products" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;ProjectFile&gt;133C0D57-8470-4CA4-9D8C-17CAF700A443/f:UnitTest1.cs&lt;/ProjectFile&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
