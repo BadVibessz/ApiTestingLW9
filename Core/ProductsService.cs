@@ -25,6 +25,7 @@ public class ProductsService
 
     private bool GetResponseStatus(HttpResponseMessage? response)
     {
+        var zz = (response?.Content.ReadAsStringAsync().Result);
         var temp = (response?.Content.ReadAsStringAsync().Result.Split(':')[1])?[1];
 
         if (temp is not null)
@@ -34,6 +35,15 @@ public class ProductsService
         }
 
         return false;
+    }
+
+    private int GetResponseId(HttpResponseMessage? response)
+    {
+        dynamic content = JsonConvert.DeserializeObject(response?.Content.ReadAsStringAsync().Result);
+
+        if (content.id is not null)
+            return content.id;
+        return -1;
     }
 
     public List<Product>? GetAll()
@@ -61,9 +71,9 @@ public class ProductsService
     public Product? Get(string id)
         => GetAll()?.Find(p => p.id == id);
 
-    public bool Create(Product product)
+    public int Create(Product product)
     {
-        bool flag = false;
+        int id = -1;
         try
         {
             var jsonObject = JsonSerializer.Serialize(product);
@@ -71,15 +81,16 @@ public class ProductsService
             var content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
             var response = _client.PostAsync($"{_api}/addproduct", content).Result;
 
-            flag = GetResponseStatus(response);
-            if (response.StatusCode != HttpStatusCode.OK) return false;
+            id = GetResponseId(response);
+
+            if (response.StatusCode != HttpStatusCode.OK) return -1;
         }
         catch
         {
-            return false;
+            return -1;
         }
 
-        return flag;
+        return id;
     }
 
     public bool Delete(string productId)
