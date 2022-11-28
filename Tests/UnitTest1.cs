@@ -51,7 +51,7 @@ public class Tests
     }
 
     [Test]
-    public void Should_Successfully_Get_Product_By_Id()
+    public void Should_Successfully_Get_Product_By_Id() // получаем продукт по айди
     {
         // arrange
         var productToCreate = _config.GetSection("valid_product_1").Get<Product>()!;
@@ -87,8 +87,6 @@ public class Tests
         Assert.That(createdId2 != -1);
         Assert.That(products!.Find(p => p.id == createdId1.ToString()) is not null);
         Assert.That(products!.Find(p => p.id == createdId2.ToString()) is not null);
-        Assert.That(createdProduct1.alias.ToUpperInvariant() == createdProduct1.title.ToUpperInvariant());
-        Assert.That(createdProduct2.alias.ToUpperInvariant() == createdProduct2.title.ToUpperInvariant());
 
         // delete
         _service.Delete(createdId1.ToString());
@@ -133,7 +131,6 @@ public class Tests
 
         // assert
         Assert.That(!products!.Exists(p => p.id == createdId.ToString()));
-        //Assert.That(createdId == -1, "Товар не был создан, но сервер говорит об обратном"); // все таки апишка не добавляет товар, просто респонс такой
     }
 
     [Test]
