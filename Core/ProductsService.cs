@@ -7,6 +7,12 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Core;
 
+public struct ApiResponse
+{
+    public string Id { get; set; }
+    public bool Status { get; set; }
+}
+
 public class ProductsService
 {
     //"C:/Users/danil/source/repos/TestingLW9/Core/config.json" //TODO: make it dynamic
@@ -25,9 +31,7 @@ public class ProductsService
 
     private bool GetResponseStatus(HttpResponseMessage? response)
     {
-        var zz = (response?.Content.ReadAsStringAsync().Result);
         var temp = (response?.Content.ReadAsStringAsync().Result.Split(':')[1])?[1];
-
         if (temp is not null)
         {
             if (temp == '1') return true;
@@ -37,13 +41,19 @@ public class ProductsService
         return false;
     }
 
-    private int GetResponseId(HttpResponseMessage? response)
+    private ApiResponse GetResponse(HttpResponseMessage? response)
     {
         dynamic content = JsonConvert.DeserializeObject(response?.Content.ReadAsStringAsync().Result);
 
+        var apiResponse = new ApiResponse();
+
         if (content.id is not null)
-            return content.id;
-        return -1;
+            apiResponse.Id = content.id;
+        else
+            apiResponse.Id = "-1";
+
+        apiResponse.Status = GetResponseStatus(response);
+        return apiResponse;
     }
 
     public List<Product>? GetAll()
@@ -71,9 +81,9 @@ public class ProductsService
     public Product? Get(string id)
         => GetAll()?.Find(p => p.id == id);
 
-    public int Create(Product product)
+    public ApiResponse Create(Product product)
     {
-        int id = -1;
+        var apiResponse = new ApiResponse();
         try
         {
             var jsonObject = JsonSerializer.Serialize(product);
@@ -81,16 +91,21 @@ public class ProductsService
             var content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
             var response = _client.PostAsync($"{_api}/addproduct", content).Result;
 
-            id = GetResponseId(response);
+            apiResponse = GetResponse(response);
 
-            if (response.StatusCode != HttpStatusCode.OK) return -1;
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                apiResponse.Id = "-1";
+                apiResponse.Status = false;
+            }
         }
         catch
         {
-            return -1;
+            apiResponse.Id = "-1";
+            apiResponse.Status = false;
         }
 
-        return id;
+        return apiResponse;
     }
 
     public bool Delete(string productId)

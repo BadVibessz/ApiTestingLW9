@@ -3,6 +3,8 @@ using Newtonsoft.Json;
 
 namespace Core;
 
+
+
 public class Product
 {
     public string? id { get; set; }
